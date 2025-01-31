@@ -53,6 +53,28 @@ public class CustomerRepository extends JPAQueryDslBaseRepository<CustomerEntity
      * {@inheritDoc}
      */
     @Override
+    public Optional<CustomerEntity> findCustomer(Long customerId) {
+        return from(customerEntity).select(Projections.bean(CustomerEntity.class,
+                                customerEntity.customerId,
+                                customerEntity.name,
+                                customerEntity.gender,
+                                customerEntity.identification,
+                                customerEntity.address,
+                                customerEntity.phone,
+                                customerEntity.customerId,
+                                customerEntity.password,
+                                customerEntity.status,
+                                customerEntity.age
+                        )
+                )
+                .where(customerEntity.customerId.eq(customerId))
+                .stream().findFirst();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Optional<CustomerEntity> findById(Long customerId) {
         return from(customerEntity)
                 .where(customerEntity.customerId.eq(customerId))

@@ -23,6 +23,14 @@ public interface ICustomerService {
     List<CustomerEntity> findCustomerList();
 
     /**
+     * Return customer information
+     *
+     * @param customerId Long
+     * @return CustomerEntity
+     */
+    CustomerEntity findCustomer(Long customerId);
+
+    /**
      * Save new customer
      *
      * @param customer CustomerVo

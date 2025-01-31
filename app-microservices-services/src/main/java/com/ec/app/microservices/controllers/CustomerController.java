@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -36,9 +35,17 @@ public class CustomerController {
                 .build(), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @GetMapping("/{customerId}")
+    public ResponseEntity<Response<CustomerEntity>> findCustomer(@PathVariable Long customerId) {
+        return new ResponseEntity<>(Response.<CustomerEntity>builder()
+                .data(customerService.findCustomer(customerId))
+                .code(HttpStatus.OK.value())
+                .build(), HttpStatus.OK);
+    }
+
+    @PostMapping("create")
     public ResponseEntity<Response<Void>> saveCustomer(
-            @RequestBody CustomerVo customer) throws IOException {
+            @RequestBody CustomerVo customer) {
         customerService.saveCustomer(customer);
         return new ResponseEntity<>(Response.<Void>builder()
                 .code(HttpStatus.CREATED.value())
@@ -48,7 +55,7 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     public ResponseEntity<Response<Void>> updateCustomer(@PathVariable Long customerId,
-                                                       @RequestBody CustomerVo customer) {
+                                                         @RequestBody CustomerVo customer) {
         customer.setCustomerId(customerId);
         customerService.updateCustomer(customer);
         return new ResponseEntity<>(Response.<Void>builder()
@@ -58,9 +65,12 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
+    public ResponseEntity<Response<Void>> deleteCustomer(@PathVariable Long customerId) {
         customerService.deleteCustomer(customerId);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(Response.<Void>builder()
+                .code(HttpStatus.OK.value())
+                .message("Eliminado con éxito")
+                .build(), HttpStatus.OK);
     }
 
 }

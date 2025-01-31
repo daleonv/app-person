@@ -8,9 +8,10 @@ import com.ec.app.microservices.CustomerVo;
 import com.ec.app.microservices.repositories.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,15 @@ public class CustomerService implements ICustomerService {
      * {@inheritDoc}
      */
     @Override
+    public CustomerEntity findCustomer(Long customerId) {
+        return customerRepository.findCustomer(customerId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void saveCustomer(CustomerVo customer) {
         customerRepository.save(CustomerEntity.builder()
                 .password(customer.getPassword())
@@ -63,10 +73,11 @@ public class CustomerService implements ICustomerService {
     public void updateCustomer(CustomerVo customer) {
         Optional<CustomerEntity> optionalCustomer = customerRepository.findById(customer.getCustomerId());
         if (optionalCustomer.isPresent()) {
-            CustomerEntity existingCustomer = getCustomerEntity(customer, optionalCustomer);
+            CustomerEntity existingCustomer = getCustomerEntity(customer,
+                    optionalCustomer.orElse(new CustomerEntity()));
             customerRepository.update(existingCustomer);
         } else {
-            throw new EntityNotFoundException("Customer with ID " + customer.getCustomerId() + " not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -84,19 +95,19 @@ public class CustomerService implements ICustomerService {
      */
     @Override
     public List<AccountStatusResponseVo> findAccountStatus(AccountStatusRequestVo filters) {
-        return customerRepository.findReportByFilters(filters.getCustomerId(), filters.getInitialDate(), filters.getEndDate());
+        return customerRepository.findReportByFilters(filters.getCustomerId(),
+                filters.getInitialDate(), filters.getEndDate());
     }
 
-    private static CustomerEntity getCustomerEntity(CustomerVo customer, Optional<CustomerEntity> optionalCustomer) {
-        CustomerEntity existingCustomer = optionalCustomer.get();
-        existingCustomer.setPassword(customer.getPassword());
-        existingCustomer.setStatus(customer.getStatus());
-        existingCustomer.setName(customer.getName());
-        existingCustomer.setGender(PersonEntity.Gender.Hombre);
-        existingCustomer.setAge(customer.getAge());
-        existingCustomer.setIdentification(customer.getIdentification());
-        existingCustomer.setAddress(customer.getAddress());
-        existingCustomer.setPhone(customer.getPhone());
-        return existingCustomer;
+    private static CustomerEntity getCustomerEntity(CustomerVo customer, CustomerEntity optionalCustomer) {
+        optionalCustomer.setPassword(customer.getPassword());
+        optionalCustomer.setStatus(customer.getStatus());
+        optionalCustomer.setName(customer.getName());
+        optionalCustomer.setGender(PersonEntity.Gender.Hombre);
+        optionalCustomer.setAge(customer.getAge());
+        optionalCustomer.setIdentification(customer.getIdentification());
+        optionalCustomer.setAddress(customer.getAddress());
+        optionalCustomer.setPhone(customer.getPhone());
+        return optionalCustomer;
     }
 }

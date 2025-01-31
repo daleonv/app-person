@@ -24,6 +24,14 @@ public interface ICustomerRepository extends IQueryDslBaseRepository<CustomerEnt
     List<CustomerEntity> findCustomerList();
 
     /**
+     * Return customer information
+     *
+     * @return CustomerEntity
+     */
+    Optional<CustomerEntity> findCustomer(Long customerId);
+
+
+    /**
      * Return customer information by customerId
      *
      * @return Optional<CustomerEntity>

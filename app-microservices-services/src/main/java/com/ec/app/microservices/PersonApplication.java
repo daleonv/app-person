@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Test procedures Application
+ * App person Application
  *
  * @author daleonv
  * @version 1.0

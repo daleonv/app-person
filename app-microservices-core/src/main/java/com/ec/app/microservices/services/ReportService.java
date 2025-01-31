@@ -2,7 +2,6 @@ package com.ec.app.microservices.services;
 
 import com.ec.app.microservices.AccountStatusRequestVo;
 import com.ec.app.microservices.AccountStatusResponseVo;
-import com.ec.app.microservices.services.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Service for account resources
+ * Service for report resources
  *
  * @author daleonv
  * @version 1.0

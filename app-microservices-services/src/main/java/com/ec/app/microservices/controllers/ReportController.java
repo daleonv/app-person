@@ -23,7 +23,7 @@ public class ReportController {
     @Autowired
     private IReportService reportService;
 
-    @PostMapping("")
+    @PostMapping("find")
     public ResponseEntity<Response<List<AccountStatusResponseVo>>> findAccountStatus(@RequestBody AccountStatusRequestVo filter) {
         return new ResponseEntity<>(Response.<List<AccountStatusResponseVo>>builder()
                 .data(reportService.findAccountStatus(filter))
