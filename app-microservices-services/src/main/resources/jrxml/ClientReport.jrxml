@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+    <parameter name="imagePath" class="java.lang.String"/>
+    <parameter name="extension" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="dateString" class="java.lang.String"/>
+    <field name="name" class="java.lang.String"/>
+    <field name="accountNumber" class="java.lang.String"/>
+    <field name="accountType" class="java.lang.String"/>
+    <field name="initialBalance" class="java.lang.Double"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="transactionType" class="java.lang.String"/>
+    <field name="amount" class="java.lang.Double"/>
+    <field name="balance" class="java.lang.Double"/>
+
+    <title>
+        <band height="150">
+            <textField>
+                <reportElement x="0" y="100" width="555" height="40"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Reporte de usuario"]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="40">
+            <frame>
+                <reportElement x="0" y="0" width="555" height="40"/>
+                <rectangle>
+                    <reportElement x="0" y="0" width="555" height="40"/>
+                </rectangle>
+                <!-- Campos en negrita -->
+                <staticText>
+                    <reportElement x="0" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Fecha]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="61" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Nombre]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="122" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Cuenta]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="183" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Tipo]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="244" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Balance inicial]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="305" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Estado]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="366" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Movimiento]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="427" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Monto]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="488" y="0" width="67" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center">
+                        <font fontName="SansSerif" isBold="true" pdfFontName="Times-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Balance]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="40">
+            <frame>
+                <reportElement x="0" y="0" width="555" height="40"/>
+                <rectangle>
+                    <reportElement x="0" y="0" width="555" height="40"/>
+                </rectangle>
+                <textField>
+                    <reportElement x="0" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression><![CDATA[$F{dateString} == null ? "" : $F{dateString}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="61" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression><![CDATA[$F{name} == null ? "" : $F{name}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="122" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression>
+                        <![CDATA[$F{accountNumber} == null ? "" : $F{accountNumber}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="183" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression>
+                        <![CDATA[$F{accountType} == null ? "" : $F{accountType}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="244" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression>
+                        <![CDATA[$F{initialBalance} == null ? "" : $F{initialBalance}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="305" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression><![CDATA[$F{status} == null ? "" : $F{status}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="366" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression>
+                        <![CDATA[$F{transactionType} == null ? "" : $F{transactionType}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="427" y="0" width="61" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression>
+                        <![CDATA[$F{amount} == null ? "" : $F{amount}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="488" y="0" width="67" height="40"/>
+                    <box>
+                        <pen lineWidth="1.0" lineColor="#000"/>
+                    </box>
+                    <textElement textAlignment="Center"/>
+                    <textFieldExpression><![CDATA[$F{balance} == null ? "" : $F{balance}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="-30" y="0" width="555" height="20"/>
+                <textElement textAlignment="Right">
+                    <font size="10"/>
+                </textElement>
+                <!-- Usa el número de página actual y el parámetro totalPages -->
+                <!--                <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>-->
+                <textFieldExpression><![CDATA[$P{extension}.equals("pdf") ? "Página " + $V{PAGE_NUMBER} : ""]]>
+                </textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Right">
+                    <font size="10"/>
+                </textElement>
+                <!-- Usa el número de página actual y el parámetro totalPages -->
+                <!--                <textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>-->
+                <textFieldExpression><![CDATA[$P{extension}.equals("pdf") ? "  / " + $V{PAGE_NUMBER} : ""]]>
+                </textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>

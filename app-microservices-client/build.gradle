@@ -23,4 +23,8 @@ dependencies {
             'javax.annotation:javax.annotation-api',
             'org.projectlombok:lombok'
     )
+
+    //Jasper
+    implementation 'net.sf.jasperreports:jasperreports'
+    implementation 'com.lowagie:itext'
 }

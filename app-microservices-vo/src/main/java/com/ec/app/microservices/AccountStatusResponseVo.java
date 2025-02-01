@@ -13,9 +13,13 @@ import java.util.Date;
 @NoArgsConstructor
 public class AccountStatusResponseVo {
     private Date date;
+    private String DateString;
     private String name;
     private String accountNumber;
+    private String accountType;
     private Double initialBalance;
     private String status;
+    private String transactionType;
+    private Double amount;
     private Double balance;
 }

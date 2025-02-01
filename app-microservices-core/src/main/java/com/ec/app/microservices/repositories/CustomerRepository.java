@@ -46,7 +46,7 @@ public class CustomerRepository extends JPAQueryDslBaseRepository<CustomerEntity
                                 customerEntity.age
                         )
                 )
-                .stream().toList();
+                .fetch();
     }
 
     /**
@@ -103,10 +103,11 @@ public class CustomerRepository extends JPAQueryDslBaseRepository<CustomerEntity
                         transaction.date,
                         customerEntity.name,
                         account.accountNumber,
-                        account.accountType,
+                        account.accountType.stringValue().as("accountType"),
                         account.initialBalance,
                         account.status,
-                        transaction.transactionType,
+                        transaction.transactionType.stringValue().as("transactionType"),
+                        transaction.amount,
                         transaction.balance
                 ))
                 .innerJoin(customerEntity.accounts, account)

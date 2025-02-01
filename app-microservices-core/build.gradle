@@ -22,6 +22,10 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    //Jasper
+    implementation 'net.sf.jasperreports:jasperreports'
+    implementation 'com.lowagie:itext'
+
 }
 
 jar {

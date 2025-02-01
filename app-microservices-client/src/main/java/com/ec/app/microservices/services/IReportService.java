@@ -14,11 +14,19 @@ import java.util.List;
 public interface IReportService {
 
     /**
-     * Return account status
+     * Return account report
      *
-     * @param filters AccountStatusRequestVo
+     * @param filter AccountStatusRequestVo
      * @return List<AccountStatusRequestVo>
      */
-    List<AccountStatusResponseVo> findAccountStatus(AccountStatusRequestVo filters);
+    List<AccountStatusResponseVo> findAccountStatus(AccountStatusRequestVo filter);
+
+    /**
+     * Download account report
+     *
+     * @param filter AccountStatusRequestVo
+     * @return byte[]
+     */
+    byte[] downloadAccountStatus(AccountStatusRequestVo filter);
 
 }

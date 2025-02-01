@@ -15,5 +15,6 @@ public class AccountStatusRequestVo {
     private Date initialDate;
     private Date endDate;
     private Long customerId;
+    private String extension;
 
 }
