@@ -87,7 +87,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public void deleteCustomer(Long customerId) {
         Optional<CustomerEntity> optionalCustomer = customerRepository.findById(customerId);
-        optionalCustomer.ifPresent(customer -> customerRepository.delete(customer));
+        if (optionalCustomer.isPresent()) {
+            optionalCustomer.ifPresent(customer -> customerRepository.delete(customer));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
