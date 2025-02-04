@@ -13,7 +13,7 @@ server:
 
 spring:
   application:
-    name: app-person
+    name: msvc-person
   profiles:
     active: dev
   datasource:
