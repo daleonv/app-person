@@ -3,6 +3,7 @@ package com.ec.app.microservices.controllers;
 import com.ec.app.entities.procedures.CustomerEntity;
 import com.ec.app.microservices.CustomerVo;
 import com.ec.app.microservices.config.Response;
+import com.ec.app.microservices.constants.PersonConstants;
 import com.ec.app.microservices.services.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -49,7 +50,7 @@ public class CustomerController {
         customerService.saveCustomer(customer);
         return new ResponseEntity<>(Response.<Void>builder()
                 .code(HttpStatus.CREATED.value())
-                .message("Creado con éxito")
+                .message(PersonConstants.CREATED_MESSAGE)
                 .build(), HttpStatus.CREATED);
     }
 
@@ -60,7 +61,7 @@ public class CustomerController {
         customerService.updateCustomer(customer);
         return new ResponseEntity<>(Response.<Void>builder()
                 .code(HttpStatus.OK.value())
-                .message("Actualizado con éxito")
+                .message(PersonConstants.UPDATED_MESSAGE)
                 .build(), HttpStatus.OK);
     }
 
@@ -69,7 +70,7 @@ public class CustomerController {
         customerService.deleteCustomer(customerId);
         return new ResponseEntity<>(Response.<Void>builder()
                 .code(HttpStatus.OK.value())
-                .message("Eliminado con éxito")
+                .message(PersonConstants.DELETED_MESSAGE)
                 .build(), HttpStatus.OK);
     }
 

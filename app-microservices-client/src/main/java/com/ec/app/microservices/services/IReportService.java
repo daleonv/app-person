@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Service interface for reports resources
  *
- * @author dalonv
+ * @author daleonv
  * @version 1.0
  */
 public interface IReportService {

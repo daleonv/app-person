@@ -3,6 +3,7 @@ package com.ec.app.microservices.services;
 import com.ec.app.microservices.AccountStatusRequestVo;
 import com.ec.app.microservices.AccountStatusResponseVo;
 import com.ec.app.microservices.common.ICommonService;
+import com.ec.app.microservices.constants.PersonConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -48,11 +49,11 @@ public class ReportService implements IReportService {
         List<AccountStatusResponseVo> report = customerService.findAccountStatus(filters);
         if (report.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        report.forEach(data->{
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        report.forEach(data -> {
+            SimpleDateFormat formatter = new SimpleDateFormat(PersonConstants.YEAR_MONTH_DAY_PATTERN);
             String dateString = formatter.format(data.getDate());
             data.setDateString(dateString);
         });
-        return commonService.generateReport(report, "jrxml/ClientReport.jrxml", filters.getExtension());
+        return commonService.generateReport(report, PersonConstants.JRXML_CLIENT_REPORT, filters.getExtension());
     }
 }

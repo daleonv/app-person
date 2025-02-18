@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Service interface for customer resources
  *
- * @author dalonv
+ * @author daleonv
  * @version 1.0
  */
 public interface ICustomerService {
